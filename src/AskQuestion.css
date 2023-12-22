@@ -1,0 +1,57 @@
+/* src/AskQuestion.css */
+.ask-question-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .ask-question-container label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .ask-question-container textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 12px;
+  }
+  
+  .ask-question-container button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .ask-question-container button:hover {
+    background-color: #45a049;
+  }
+  /* styles.css or your custom stylesheet */
+
+
+/* Optional: You can customize the container max-width based on your design */
+@media (min-width: 576px) {
+  .custom-container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .custom-container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .custom-container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .custom-container {
+    max-width: 1140px;
+  }
+}
