@@ -1,6 +1,6 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, setPersistence, browserSessionPersistence } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
@@ -18,7 +18,13 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const firestore = getFirestore(app);
-
+setPersistence(auth, browserSessionPersistence)
+  .then(() => {
+    console.log("Firebase Auth persistence set");
+  })
+  .catch((error) => {
+    console.error("Error setting Firebase Auth persistence:", error);
+  });
 const FirebaseContext = createContext();
 console.log('app:', app);
 console.log('auth:', auth);
@@ -40,7 +46,7 @@ export const FirebaseProvider = ({ children }) => {
     </FirebaseContext.Provider>
   );
 };
-export { auth, /* other exports */ };
+export { auth,firestore};
 
 export const useFirebase = () => {
     const { user, auth, firestore } = useContext(FirebaseContext);

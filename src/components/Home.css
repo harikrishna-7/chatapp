@@ -77,11 +77,6 @@ body {
 .form-select{
   width: 40% !important;
 }
-/* ... Other styles for the main content area ... */
-
-
-/* Adjust the margin for the content */
-
 .content {
   padding: 20px;
   box-sizing: border-box;
@@ -105,11 +100,22 @@ h2 {
 }
 
 .content {
-  margin-left: 25%;
-  padding: 20px;
-  width: 80%;
+  margin-left: 28%;
+    padding: 26px;
+    width: 80%;
 }
+.prof-content{
+  margin-left: 28%;
+    padding: 26px;
+    width: 29%;
+}
+.question-content{
+  margin-left: 24%;
+    /* padding: 10px; */
+    width: 70%;
+    padding: 26px;
 
+}
 .label {
   display: block;
   margin-bottom: 8px;
@@ -140,4 +146,6 @@ h2 {
 .submit-btn:hover {
   background-color: #0056b3;
 }
-
+.qdata{
+  padding-left: 0rem !important
+}

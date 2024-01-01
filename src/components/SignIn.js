@@ -19,18 +19,24 @@ const SignIn = () => {
 
     const handleSignIn = async () => {
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const response =await signInWithEmailAndPassword(auth, email, password);
+            localStorage.setItem('user', response.user.uid)
+            // console.log(localStorage)
             navigate('/Home');
             console.log('User signed in successfully!');
 
         } catch (error) {
-            alert(error.message);
+            if(error.message === "Firebase: Error (auth/invalid-login-credentials).")
+                alert("invalid-login-credentials");
+            else if(error.message === "Firebase: Error (auth/invalid-email).")
+                alert("invalid-email");
+
         }
     };
 
     return (
         <div className="auth-form">
-            <h2>Sign In</h2>
+            <h2>Student Sign In</h2>
             <label>Email:</label>
             <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <label>Password:</label>

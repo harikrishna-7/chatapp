@@ -11,6 +11,7 @@ const Navbar = () => {
     // Sign out the user and redirect to the sign-in page
     try {
       await auth.signOut();
+      localStorage.user ='';
       navigate('/signin');
     } catch (error) {
       console.error('Error during sign out:', error.message);

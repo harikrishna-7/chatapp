@@ -1,12 +1,17 @@
 /* src/components/Profile.css */
 .profile-container {
-    display: flex;
+    display: inline;
     flex-direction: column;
     align-items: center;
     /* margin: 20px; */
-    margin-right: 10%;
+    /* margin-right: 10%; */
   }
-  
+  .profile-form{
+    width: 26%;
+    margin-left: 26%;
+    top: -31px;
+    position: relative;
+  }
   .form-container {
     width: 300px;
     margin: 20px;
@@ -36,5 +41,13 @@
   
   button:hover {
     background-color: #45a049;
+  }
+  .cpwd{
+    bottom: 10px;
+    position: relative;
+  }
+  .profile-header{
+    margin-left: 30%;
+
   }
   
