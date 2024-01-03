@@ -170,7 +170,7 @@ const Home = () => {
           {apiResponse && (
             <div className="api-response">
               <h4>Answer:</h4>
-              <span>{JSON.stringify(apiResponse.data.content.replace(/[^a-zA-Z ]/g, ""), null, 2)}</span>
+              <span>{JSON.stringify(apiResponse.data.content.replace(/[^a-zA-Z0-9 ]/g, ""), null, 2)}</span>
             </div>
           )}
         </div>
