@@ -41,7 +41,6 @@
   flex-direction: column;
   align-items: center;
 }
-/* Welcome.css */
 
 body {
   font-family: 'Arial', sans-serif;
@@ -49,21 +48,6 @@ body {
   padding: 0;
   background-color: #f0f0f0;
 }
-
-
-/* Welcome.css */
-
-/* body {
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f0f0f0;
-  display: flex;
-  height: 100vh;
-  overflow: hidden;
-} */
-
-/* Welcome.css */
 
 .container {
   display: flex;
@@ -100,19 +84,19 @@ h2 {
 }
 
 .content {
-  margin-left: 28%;
+  margin-left: 21%;
     padding: 26px;
     width: 80%;
 }
 .prof-content{
-  margin-left: 28%;
+  margin-left: 21%;
     padding: 26px;
     width: 29%;
 }
 .question-content{
-  margin-left: 24%;
+  margin-left: 18%;
     /* padding: 10px; */
-    width: 70%;
+    width: 80%;
     padding: 26px;
 
 }
@@ -148,4 +132,12 @@ h2 {
 }
 .qdata{
   padding-left: 0rem !important
+}
+.error {
+  color: red;
+  font-size: 12px;
+}
+
+.error-border {
+  border: 1px solid red;
 }

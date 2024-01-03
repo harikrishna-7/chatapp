@@ -4,9 +4,8 @@ import Axios from 'axios';
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore';
 import { useFirebase } from '../firebase';
 import Navbar from './Navbar';
-import './Home.css'; // Import the CSS file
+import './Home.css'; 
 import './Navbar.css'; 
-// Import your loader GIF
 import loaderGIF from '../loading-loader.gif';
 
 const Home = () => {
@@ -19,10 +18,13 @@ const Home = () => {
   const [selectedSourceId, setSelectedSourceId] = useState(null);
   const [loading, setLoading] = useState(false);
   const { user, firestore } = useFirebase();
-
+  const [standardError, setStandardError] = useState(false);
+  const [subjectError, setSubjectError] = useState(false);
+  const [questionError, setQuestionError] = useState(false);
   const subjectSourceIdMap = {
     Mathematics: "src_uBiADHvfj3PXE8EpZHPdO",
     Science: "src_IImeo6tTzTBPJLsF3c67B",
+    English:"src_ml9YH3WBiLmKyIkcFmc1d"
   };
 
   const handleSubjectChange = (event) => {
@@ -34,21 +36,25 @@ const Home = () => {
 
   const handleSubmit = async () => {
     try {
+      setStandardError(false);
+      setSubjectError(false);
+      setQuestionError(false);
+
+      // Validation
       if (!standard || standard === '--Select--') {
-        alert('Please select a standard.');
+        setStandardError(true);
         return;
       }
 
       if (!subject || subject === '--Select--') {
-        alert('Please select a subject.');
+        setSubjectError(true);
         return;
       }
 
       if (!question.trim()) {
-        alert('Please enter your question.');
+        setQuestionError(true);
         return;
       }
-
       if (!selectedSourceId) {
         console.error('Selected sourceId is null or undefined');
         return;
@@ -98,8 +104,6 @@ const Home = () => {
         const docRef = await addDoc(questionsCollection, questionData);
         console.log('Question added with ID:', docRef.id);
       }
-
-      alert('Question submitted successfully!');
     } catch (error) {
       console.log('API Response Error:', error.response);
       console.error('Error submitting question:', error);
@@ -117,8 +121,14 @@ const Home = () => {
           <h2>Welcome to the Question Portal!</h2>
 
           <div>
-            <label className="label">Select Standard:</label>
-            <select className="form-select select-standard" onChange={(e) => setStandard(e.target.value)}>
+          <label className={`label ${standardError ? 'error' : ''}`}>Select Standard:</label>
+          <select
+            id="selstandard" className={`form-select select-standard ${standardError ? 'error-border' : ''}`}
+            onChange={(e) => {
+              setStandard(e.target.value);
+              setStandardError(false); // Reset error when the user makes a selection
+            }}
+          >
               {standards.map((std, index) => (
                 <option key={index}>{std}</option>
               ))}
@@ -126,8 +136,13 @@ const Home = () => {
           </div>
 
           <div>
-            <label className="label">Select Subject:</label>
-            <select className="form-select select-subject" onChange={handleSubjectChange}>
+            <label className={`label ${subjectError ? 'error' : ''}`}>Select Subject:</label>
+            <select
+              id="selsubj" className={`form-select select-subject ${subjectError ? 'error-border' : ''}`}
+              onChange={(e) => {
+                handleSubjectChange(e);
+                setSubjectError(false); // Reset error when the user makes a selection
+              }} >       
               {subjects.map((subj, index) => (
                 <option key={index}>{subj}</option>
               ))}
@@ -135,24 +150,27 @@ const Home = () => {
           </div>
 
           <div>
-            <label className="label">Enter Your Question:</label>
-            <textarea
-              className="form-control question-input"
-              rows="4"
-              cols="50"
-              placeholder="Type your question here..."
-              onChange={(e) => setQuestion(e.target.value)}
+             <label className={`label ${questionError ? 'error' : ''}`}>Enter Your Question:</label>
+              <textarea
+                className={`form-control question-input ${questionError ? 'error-border' : ''}`}
+                rows="4"
+                cols="50"
+                placeholder="Type your question here..."
+                onChange={(e) => {
+                  setQuestion(e.target.value);
+                  setQuestionError(false); // Reset error when the user enters text
+                }}
             ></textarea>
           </div>
 
-          <button type="button" className="submit" onClick={handleSubmit}>
+          <button type="button" className="btn btn-primary submit" onClick={handleSubmit}>
             {loading ? <img src={loaderGIF} width="50px" height="20px"   alt="loading" /> : 'Submit'}
           </button>
 
           {apiResponse && (
             <div className="api-response">
               <h4>Answer:</h4>
-              <span>{JSON.stringify(apiResponse.data.content.replace(/\n/g, '\n'), null, 2)}</span>
+              <span>{JSON.stringify(apiResponse.data.content.replace(/[^a-zA-Z ]/g, ""), null, 2)}</span>
             </div>
           )}
         </div>

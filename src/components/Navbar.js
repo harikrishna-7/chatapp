@@ -1,11 +1,12 @@
 // src/components/Navbar.js
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate,useLocation  } from 'react-router-dom';
 import { useFirebase } from '../firebase';
 
 const Navbar = () => {
   const navigate = useNavigate();
   const { auth } = useFirebase();
+  const location = useLocation();
 
   const handleSignOut = async () => {
     // Sign out the user and redirect to the sign-in page
@@ -22,17 +23,17 @@ const Navbar = () => {
     <div className="left-nav">
     <nav>
       <ul>
+        <li className={location.pathname === '/home' ? 'active' : ''}>
+            <Link to="/home">Home</Link>
+          </li>
+          <li className={location.pathname === '/profile' ? 'active' : ''}>
+            <Link to="/profile">Profile</Link>
+          </li>
+          <li id ="prevque" className={location.pathname === '/previous-questions' ? 'active' : ''}>
+            <Link to="/previous-questions">Previous Questions</Link>
+          </li>
         <li>
-          <Link to="/home">Home</Link>
-        </li>
-        <li>
-          <Link to="/profile">Profile</Link>
-        </li>
-        <li>
-          <Link to="/previous-questions">Previous Questions</Link>
-        </li>
-        <li>
-          <Link onClick={handleSignOut}>Sign Out</Link>
+          <Link onClick={handleSignOut}>Log Out</Link>
         </li>
       </ul>
     </nav>

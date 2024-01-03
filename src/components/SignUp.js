@@ -1,7 +1,7 @@
 // src/components/SignUp.js
 import React, { useState } from 'react';
 import { useFirebase } from '../firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth'; // Import createUserWithEmailAndPassword from firebase/auth
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import '../AuthForm.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { collection, addDoc } from 'firebase/firestore';
@@ -32,7 +32,8 @@ const SignUp = () => {
           email: user.email,
         });
       }
-      navigate('/welcome');
+      localStorage.setItem('user', userCredential.user.uid)
+      navigate('/Home');
       console.log('User registered successfully!');
 
     } catch (error) {
@@ -47,8 +48,8 @@ const SignUp = () => {
 
   return (
     <div  className="auth-form">
-      <h2>Sign Up</h2>
-      <label>Username:</label>
+      <h2>Student Sign Up</h2>
+      <label>Student Name:</label>
       <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
       <label>Email:</label>
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />

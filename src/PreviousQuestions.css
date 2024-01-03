@@ -28,7 +28,6 @@
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
   }
   
-  /* Add other styles as needed */
   /* src/components/PreviousQuestions.css */
 .questions-container {
     display: flex;
@@ -43,6 +42,4 @@
     margin-bottom: 10px;
     width: 300px;
   }
-  
-  /* Add more styles based on your design preferences */
-  
+    

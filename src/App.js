@@ -4,11 +4,10 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { FirebaseProvider } from './firebase';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
-import SignOut from './components/SignOut'; // Import the SignOut component
+import SignOut from './components/SignOut';
 import Profile from './components/Profile';
 import PreviousQuestions from './components/PreviousQuestions';
-import Home from './components/Home'; // Import the Home component
-// import Welcome from './components/Welcome';
+import Home from './components/Home';
 import withAuth from './Hoc';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { AuthProvider } from './contexts/AuthContext';

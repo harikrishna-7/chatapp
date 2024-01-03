@@ -21,6 +21,7 @@ const PreviousQuestions = () => {
           const querySnapshot = await getDocs(q);
           const questionsData = querySnapshot.docs.map((doc) => ({
             id: doc.id,
+            time:doc.timestamp,
             ...doc.data(),
           }));
           setQuestions(questionsData);
@@ -36,7 +37,7 @@ const PreviousQuestions = () => {
   return (
     <div>
       <Navbar />
-      <div className="question-content">
+      <div className="question-content" id="questcont">
         <h2>Previously Asked Questions</h2>
         <p></p>
         {questions.length === 0 ? (

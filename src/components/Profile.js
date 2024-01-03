@@ -4,7 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { collection, query, where, getDocs, updateDoc, doc } from "firebase/firestore";
 import { firestore } from '../firebase';
 
-import { updateProfile,reauthenticateWithCredential, EmailAuthProvider} from '@firebase/auth';
+import { updateProfile, reauthenticateWithCredential, EmailAuthProvider } from '@firebase/auth';
 import './Navbar.css';
 import '../Profile.css';
 
@@ -26,8 +26,8 @@ const Profile = () => {
           id: doc.id,
           data: doc.data(),
         }));
-// console.log(userDocs[0].id)
-        if (userDocs) {
+
+        if (userDocs.length > 0) {
           setNewName(userDocs[0].data.username);
           setDocId(userDocs[0].id);
         }
@@ -57,20 +57,19 @@ const Profile = () => {
 
       // Update the display name in Firebase Authentication
       await updateProfile(currentUser, { displayName: newName });
-console.log(docId)
+
       // Update the username in Firestore
-      const userRef = doc(firestore, 'users',docId);
+      const userRef = doc(firestore, 'users', docId);
       await updateDoc(userRef, { username: newName });
 
       setSuccess(true);
     } catch (error) {
-      setError('')
-      if(error.message === "Firebase: Error (auth/invalid-login-credentials).")
-      {
-        setError("Invalid Password, Please try again.")
+      setError('');
+      if (error.message === "Firebase: Error (auth/invalid-login-credentials).") {
+        setError("Invalid Password, Please try again.");
+      } else {
+        setError(error.message);
       }
-      else
-      setError(error.message);
     }
   };
 
@@ -78,18 +77,22 @@ console.log(docId)
     <div>
       <Navbar />
 
-      <div className="container">
-        {/* <h2 className="profile-header"><b>Profile</b></h2> */}
+      <div className="container mt-4">
+        <h2 className="profile-header"><b>Profile</b></h2>
         <form className="prof-content">
           <p><b>Email</b>: {currentUser ? currentUser.email : 'Loading...'}</p>
 
-          <label><b>Username</b>:</label>
-          <input type="text" value={newName} onChange={(e) => setNewName(e.target.value)} />
+          <div className="mb-3">
+            <label htmlFor="username" className="form-label"><b>Username</b>:</label>
+            <input type="text" className="form-control" id="username" value={newName} onChange={(e) => setNewName(e.target.value)} />
+          </div>
 
-          <label><b>Current Password</b>:</label>
-          <input class="cpwd" type="password" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+          <div className="mb-3">
+            <label htmlFor="currentPassword" className="form-label"><b>Current Password</b>:</label>
+            <input type="password" className="form-control" id="currentPassword" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
+          </div>
 
-          <button onClick={handleNameUpdate}>Update Username</button>
+          <button type="button" id="profsub" className="btn btn-primary" onClick={handleNameUpdate}>Update Username</button>
 
           {error && <p style={{ color: 'red' }}>{error}</p>}
           {success && <p style={{ color: 'green' }}>Profile updated successfully!</p>}

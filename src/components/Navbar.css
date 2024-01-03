@@ -1,49 +1,17 @@
 /* src/components/Navbar.css */
-/* nav {
-    background-color: #333;
-    padding: 10px;
-  }
-  
-  ul {
-    list-style-type: none;
-    padding: 0;
-    display: flex;
-    justify-content: space-around;
-  }
-  
-  li {
-    margin: 0;
-  }
-  
-  li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-    transition: color 0.3s ease;
-  }
-  
-  li a:hover {
-    color: #f44336;
-  }
-  
-  
-  
-  button:hover {
-    background-color: #d32f2f;
-  }
-   */
-   button {
-    background-color: #83ea96;
-    color: rgb(0, 0, 0);
-    border-radius: 3% !important;
-    font-weight: bold;
-    padding: 8px 16px;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-  }
+
+button {
+  background-color: #83ea96;
+  color: rgb(0, 0, 0);
+  border-radius: 3% !important;
+  font-weight: bold;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
 nav {
   margin-top: 20px;
 }
@@ -68,11 +36,10 @@ a {
 a:hover {
   color: #4caf50;
 }
-/* NavBar.css */
 
 .left-nav {
   top: 0;
-  width: 23%;
+  width: 18%;
   background-color: #333;
   color: white;
   padding: 20px;
@@ -83,11 +50,14 @@ a:hover {
 .left-nav h2 {
   color: white;
 }
-
+.left-nav li.active a {
+  color: #4caf50 !important; 
+}
 .left-nav ul {
   list-style-type: none;
   padding: 0;
-  position: fixed;
+  line-height: 30px;
+  /* position: fixed; */
   height: 100%;
   overflow: auto;
 }
@@ -97,11 +67,47 @@ a:hover {
   cursor: pointer;
 }
 
-.left-nav li:hover {
-  color: #ffcc00;
+.left-nav li a:hover {
+  color: #4caf50 !important;
 }
+
 .custom-container {
   margin-right: auto;
   margin-left: auto;
   padding-left: 22%;
+}
+#prevque{
+  line-height: 19px;
+
+}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .left-nav {
+    width: 23%;
+    padding: 4px;
+  }
+#username, #currentPassword{
+  width: 200px ;
+}
+.prof-content{
+  margin-left: 24% ;
+}
+  .custom-container {
+    padding-left: 0;
+  }
+  .profile-header {
+    margin-left: 27% !important;
+}
+.question-content {
+  margin-left: 22%;
+}
+#questcont{
+  margin-left: 20%;
+}
+#selsubj, #selstandard{
+  width: 70% !important;
+}
+#profsub{
+  width: 155px;
+}
 }
